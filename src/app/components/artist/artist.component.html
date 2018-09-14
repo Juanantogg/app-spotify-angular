@@ -31,42 +31,43 @@
       </div>
     </div>
   </div>
-</div>
-
-<div>
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Album</th>
-      <th scope="col">Preview</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let track of topTracks; let i = index;">
-      <th scope="row">{{ i + 1 }}</th>
-      <td>{{ track.name }}</td>
-      <td class="d-flex flex-column align-items-center">
-        <img class="img-thumb mb-2" [src]="track.album.images | noimages" >
-        {{ track.album.name }}
-      </td>
-      <td>
-        <ng-container *ngIf="track.preview_url; else elseTemplate">
-            <ng-container *ngIf="i < 5; else elseTemplate">
-              <audio [src]="track.preview_url" controls></audio>
+  <h2 class="w-100 text-center mt-5">Lo más top de este artista</h2>
+  <div class="m-auto">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Album</th>
+          <th scope="col">Preview</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let track of topTracks; let i = index;">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ track.name }}</td>
+          <td class="d-flex flex-column align-items-center">
+            <img class="img-thumb mb-2" [src]="track.album.images | noimages" >
+            {{ track.album.name }}
+          </td>
+          <td style="vertical-align: inherit">
+            <ng-container *ngIf="track.preview_url; else elseTemplate">
+                <ng-container *ngIf="i < 5; else elseTemplate">
+                  <audio class="d-block m-auto" [src]="track.preview_url" controls></audio>
+                </ng-container>
+                <ng-template #elseTemplate>
+                  <iframe [src]="'https://open.spotify.com/embed/track/' + track.id | domseguro" width="300" height="80" frameborder="0"
+                    allowtransparency="true" allow="encrypted-media"></iframe>
+                </ng-template>
             </ng-container>
             <ng-template #elseTemplate>
-              <iframe [src]="'https://open.spotify.com/embed/track/' + track.id | domseguro" width="300" height="80" frameborder="0"
-                allowtransparency="true" allow="encrypted-media"></iframe>
+                <iframe [src]="'https://open.spotify.com/embed/track/' + track.id | domseguro" width="300" height="80" frameborder="0"
+                  allowtransparency="true" allow="encrypted-media"></iframe>
             </ng-template>
-        </ng-container>
-        <ng-template #elseTemplate>
-            <iframe [src]="'https://open.spotify.com/embed/track/' + track.id | domseguro" width="300" height="80" frameborder="0"
-              allowtransparency="true" allow="encrypted-media"></iframe>
-        </ng-template>
-      </td>
-    </tr>
-  </tbody>
-</table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
+

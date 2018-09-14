@@ -42,7 +42,7 @@ export class SearchComponent implements OnInit {
 
   private detenerContador() {
     clearInterval(this.intervalo);
-    this.showContador = false;
+    // this.showContador = false;
   }
 
   buscar(event: KeyboardEvent, valor: String) {

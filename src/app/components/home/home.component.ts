@@ -10,16 +10,21 @@ export class HomeComponent {
   public newReleases: any;
   public loading: Boolean = true;
 
-  constructor( private spotifyService: SpotifyService ) {
-    this.spotifyService
-      .getNewReleases()
-      .subscribe(res => {
-        this.newReleases = res;
+  constructor(private spotifyService: SpotifyService) {
+    const intervaloToken = setInterval(() => {
+      console.log(this.spotifyService.getToken());
+      if (this.spotifyService.getToken()) {
+        clearInterval(intervaloToken);
+        this.spotifyService
+          .getNewReleases()
+          .subscribe(res => {
+            this.newReleases = res;
 
-        setTimeout(() => {
-          this.loading = false;
-        }, 500);
-      });
+            setTimeout(() => {
+              this.loading = false;
+            }, 500);
+          });
+      }
+    }, 100);
   }
-
 }

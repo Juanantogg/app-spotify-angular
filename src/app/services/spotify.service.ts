@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
-import {token} from './../token-spotify.json';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -18,7 +16,7 @@ export class SpotifyService {
     const URL = 'https://api.spotify.com/v1/';
 
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${this.token}`,
       'Content-type': 'application/json'
     });
 
@@ -42,5 +40,14 @@ export class SpotifyService {
   searchArtists(termino: String) {
     return this.getQuery(`search?q=${termino}&type=artist&limit=20`)
       .pipe(map(data => data['artists'].items));
+    }
+
+  getTokenSpotify() {
+    return this.http.get(`http://localhost:4201/spotify-token`)
+      .subscribe(data => this.token = data['token']);
+  }
+
+  getToken() {
+    return this.token;
   }
 }

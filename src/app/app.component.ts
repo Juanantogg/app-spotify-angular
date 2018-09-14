@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SpotifyService } from './services/spotify.service';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  constructor() {
+  constructor(private spotifyService: SpotifyService) {
+    this.spotifyService.getTokenSpotify();
+    setInterval(() => {
+      this.spotifyService.getTokenSpotify();
+    }, 3000000);
   }
 }

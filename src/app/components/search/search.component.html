@@ -1,9 +1,19 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-    <input class="form-control form-control-lg" type="text" placeholder="Busca tu artista o canción favorista" #busqueda (keyup)='buscar($event, busqueda.value)'>
-    <small *ngIf="showContador" class="d-block w-100 text-secondary">La petición se lanza en {{ contador }}</small>
+    <input class="form-control form-control-lg" type="text" placeholder="Busca tu artista favoristo" #busqueda (keyup)='buscar($event, busqueda.value)'>
+    <small *ngIf="showContador" class="d-block w-100 text-secondary">
+      Buscamos tus artistas en
+      <ng-container *ngIf="contador > 0; else elseTemplate">
+        {{ contador }}
+      </ng-container>
+      <ng-template #elseTemplate>
+        <i class="fa fa-sync fa-spin"></i>
+      </ng-template>
+
+    </small>
   </div>
-  <app-sppiner *ngIf="loading" class="animated fadeIn"></app-sppiner>
+
+  <app-sppiner *ngIf="loading" class="mt-5 pt-5 animated fadeIn"></app-sppiner>
 
   <div *ngIf="!loading" class="row mt-5 animated fadeIn">
     <div class="card-columns">
