@@ -1,0 +1,21 @@
+<div class="card">
+  <img class="card-img-top" [src]="item.images | noimages" alt="Card image cap">
+  <div class="card-body">
+    <h5 *ngIf="item.artists" class="card-title">{{ item.name }}</h5>
+    <h5 *ngIf="!item.artists" class="m-0 card-title">{{ item.name }}</h5>
+    <p class="card-text badge badge-primary" *ngIf="item.album_type == 'single'">{{ item.album_type }}</p>
+    <p class="card-text badge badge-success" *ngIf="item.album_type == 'album'">{{ item.album_type }}</p>
+  </div>
+  <ul *ngIf="item.artists" class="list-group">
+    <li
+      class="list-group-item list-group-item-light puntero"
+      *ngFor="let artist of item.artists"
+      (click)='mostrarArtista(artist.id)'
+    >
+      {{ artist.name }}
+    </li>
+  </ul>
+  <div *ngIf="!item.artists" class="pt-0 card-body">
+    <a (click)="mostrarArtista(item.id)" class="btn btn-success btn-block">Ver artista</a>
+  </div>
+</div>

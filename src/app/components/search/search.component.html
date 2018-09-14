@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row">
+    <input class="form-control form-control-lg" type="text" placeholder="Busca tu artista o canción favorista" #busqueda (keyup)='buscar($event, busqueda.value)'>
+    <small *ngIf="showContador" class="d-block w-100 text-secondary">La petición se lanza en {{ contador }}</small>
+  </div>
+  <app-sppiner *ngIf="loading" class="animated fadeIn"></app-sppiner>
+
+  <div *ngIf="!loading" class="row mt-5 animated fadeIn">
+    <div class="card-columns">
+      <app-card [item]="artist" *ngFor="let artist of artists"></app-card>
+    </div>
+  </div>
+</div>

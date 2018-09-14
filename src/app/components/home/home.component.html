@@ -1,0 +1,4 @@
+<app-sppiner *ngIf="loading" class="animated fadeIn"></app-sppiner>
+<div *ngIf="!loading" class="card-columns animated fadeIn">
+  <app-card [item]="release" *ngFor="let release of newReleases"></app-card>
+</div>
